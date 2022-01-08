@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "target": "es2017",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "~/config/*": ["config/*"],
+      "~/start/*": ["start/*"],
+      "~/tests/*": ["tests/*"],
+      "~/*": ["app/*"]
+    }
+  }
+}
