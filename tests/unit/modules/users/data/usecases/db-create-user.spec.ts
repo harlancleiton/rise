@@ -24,4 +24,14 @@ describe('DbCreateUser', () => {
 
     expect(userRepository.create).toBeCalledWith(createUser);
   });
+
+  it('should throw if usersRepository.create throws', async () => {
+    const createUser = factories.users.createUser.build();
+
+    jest.spyOn(userRepository, 'create').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    await expect(sut.execute(createUser)).rejects.toThrowError();
+  });
 });
