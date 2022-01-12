@@ -62,4 +62,18 @@ describe('DbCreateUser', () => {
 
     expect(userRepository.create).not.toBeCalled();
   });
+
+  it('should return a new user', async () => {
+    const createUser = factories.users.createUser.build();
+
+    const mockedUser = factories.users.user.build();
+
+    jest
+      .spyOn(userRepository, 'create')
+      .mockReturnValueOnce(Promise.resolve(mockedUser));
+
+    const user = await sut.execute(createUser);
+
+    expect(user).toEqual(mockedUser);
+  });
 });
