@@ -13,9 +13,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "argon2": "^0.28.3",
+    "bcryptjs": "^2.4.3",
     "fastify": "^3.25.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/faker": "^5.5.9",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.8",
