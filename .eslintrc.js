@@ -22,6 +22,10 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-empty-function': [
+      'error',
+      { allow: ['private-constructors'] }
+    ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {
