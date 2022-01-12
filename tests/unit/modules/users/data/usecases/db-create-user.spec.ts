@@ -48,4 +48,18 @@ describe('DbCreateUser', () => {
 
     expect(hash.make).toBeCalledWith(expectedPassword);
   });
+
+  it('should throw if hash.make throws', async () => {
+    const createUser = factories.users.createUser.build();
+
+    jest.spyOn(hash, 'make').mockImplementationOnce(() => {
+      throw new Error();
+    });
+
+    jest.spyOn(userRepository, 'create');
+
+    await expect(sut.execute(createUser)).rejects.toThrowError();
+
+    expect(userRepository.create).not.toBeCalled();
+  });
 });
