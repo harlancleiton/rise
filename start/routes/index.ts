@@ -1,11 +1,11 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 
-export default function (
+export default async function (
   fastify: FastifyInstance,
   opts: FastifyPluginOptions,
   done: (err?: Error) => void
 ) {
-  fastify.register(import('./v1'), { ...opts, prefix: 'v1' });
+  await fastify.register(import('./v1'), { ...opts, prefix: 'v1' });
 
   done();
 }

@@ -1,11 +1,11 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 
-export default function (
+export default async function (
   fastify: FastifyInstance,
   opts: FastifyPluginOptions,
   done: (err?: Error) => void
 ) {
-  fastify.register(import('./routes'), opts);
+  await fastify.register(import('./routes'), opts);
 
   done();
 }

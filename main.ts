@@ -16,7 +16,7 @@ async function bootstrap() {
     done();
   });
 
-  fastify.register(import('./start/routes'));
+  await fastify.register(import('./start/routes'));
 
   fastify.listen(3333, '0.0.0.0', err => {
     if (err) {
