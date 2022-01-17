@@ -12,6 +12,11 @@ export class DbTransferFundsBetweenInternalAccounts
   public async execute(
     payload: TransferFundsBetweenInternalAccountsModel
   ): Promise<void> {
+    const parsedValueCents = Number(payload.valueCents);
+
+    if (parsedValueCents <= 0)
+      throw new Error('O valor da transferência deve ser maior que zero');
+
     const creditDestinationAccountPromise = this.addMovement.execute({
       userId: payload.destinationAccount,
       valueCents: payload.valueCents
