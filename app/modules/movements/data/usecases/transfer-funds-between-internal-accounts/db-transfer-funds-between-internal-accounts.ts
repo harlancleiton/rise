@@ -16,9 +16,11 @@ export class DbTransferFundsBetweenInternalAccounts
       userId: payload.destinationAccount,
       valueCents: payload.valueCents
     });
+
+    const negativeValueCents = `-${payload.valueCents}`;
     const debitSourceAccountPromise = this.addMovement.execute({
       userId: payload.sourceAccount,
-      valueCents: payload.valueCents
+      valueCents: negativeValueCents
     });
 
     await Promise.all([
