@@ -13,6 +13,12 @@ export class DbCreateUser implements CreateUser {
     const hashedPassword = await this.hash.make(payload.password);
     payload.password = hashedPassword;
 
+    const findUserEmail = await this.userRepository.findByEmail(payload.email);
+    if (findUserEmail) throw new Error('Email já cadastrado');
+
+    const findUserCpf = await this.userRepository.findByCpf(payload.cpf);
+    if (findUserCpf) throw new Error('CPF já cadastrado');
+
     const user = await this.userRepository.create(payload);
     return user;
   }

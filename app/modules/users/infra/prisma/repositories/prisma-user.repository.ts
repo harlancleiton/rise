@@ -9,4 +9,12 @@ export class PrismaUserRepository implements UserRepository {
   public create(input: CreateUserInput): Promise<UserModel> {
     return this.prismaClient.user.create({ data: input });
   }
+
+  public findByCpf(cpf: string): Promise<UserModel | null> {
+    return this.prismaClient.user.findUnique({ where: { cpf } });
+  }
+
+  public findByEmail(email: string): Promise<UserModel | null> {
+    return this.prismaClient.user.findUnique({ where: { email } });
+  }
 }
