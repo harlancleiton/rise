@@ -12,5 +12,10 @@ export default async function (
     prefix: 'movements'
   });
 
+  await fastify.register(import('./transfer-funds-between-internal-accounts'), {
+    ...opts,
+    prefix: 'transfer-funds-between-internal-accounts'
+  });
+
   done();
 }
