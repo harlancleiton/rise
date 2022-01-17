@@ -1,4 +1,5 @@
 import {
+  AddMovement,
   TransferFundsBetweenInternalAccounts,
   TransferFundsBetweenInternalAccountsModel
 } from '~/modules/movements/domain';
@@ -6,10 +7,23 @@ import {
 export class DbTransferFundsBetweenInternalAccounts
   implements TransferFundsBetweenInternalAccounts
 {
-  public execute(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(private readonly addMovement: AddMovement) {}
+
+  public async execute(
     payload: TransferFundsBetweenInternalAccountsModel
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    const creditDestinationAccountPromise = this.addMovement.execute({
+      userId: payload.destinationAccount,
+      valueCents: payload.valueCents
+    });
+    const debitSourceAccountPromise = this.addMovement.execute({
+      userId: payload.sourceAccount,
+      valueCents: payload.valueCents
+    });
+
+    await Promise.all([
+      creditDestinationAccountPromise,
+      debitSourceAccountPromise
+    ]);
   }
 }
