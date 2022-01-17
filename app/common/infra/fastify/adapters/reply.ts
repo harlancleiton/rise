@@ -1,6 +1,6 @@
 import { FastifyReply } from 'fastify';
 
-import { ResponseContract, ValidationError } from '~/common/presentation';
+import { ResponseContract } from '~/common/presentation';
 
 export class FastifyReplyAdapter implements ResponseContract {
   constructor(private readonly reply: FastifyReply) {}
@@ -17,8 +17,8 @@ export class FastifyReplyAdapter implements ResponseContract {
     this.reply.status(204).send();
   }
 
-  public badRequest(errors: ValidationError[]): void {
-    this.reply.status(400).send({ errors });
+  public badRequest(body: any): void {
+    this.reply.status(400).send(body);
   }
 
   public unauthorized(body?: any): void {

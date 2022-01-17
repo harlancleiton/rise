@@ -20,7 +20,11 @@ export class AddMovementController implements ControllerContract {
 
     if (errors.length) return response.badRequest({ errors });
 
-    const movement = await this.addMovement.execute(payload);
-    response.created(movement);
+    try {
+      const movement = await this.addMovement.execute(payload);
+      response.created(movement);
+    } catch (error) {
+      response.badRequest({ error: error.message });
+    }
   }
 }

@@ -22,7 +22,11 @@ export class TransferFundsBetweenInternalAccountsController
 
     if (errors.length) return response.badRequest({ errors });
 
-    await this.transferFundsBetweenInternalAccounts.execute(payload);
-    response.noContent();
+    try {
+      await this.transferFundsBetweenInternalAccounts.execute(payload);
+      response.noContent();
+    } catch (error) {
+      response.badRequest({ error: error.message });
+    }
   }
 }

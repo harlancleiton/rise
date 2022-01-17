@@ -5,15 +5,24 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
+    "useUnknownInCatchVariables": false,
     "target": "es2017",
     "module": "CommonJS",
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "~/config/*": ["config/*"],
-      "~/start/*": ["start/*"],
-      "~/tests/*": ["tests/*"],
-      "~/*": ["app/*"]
+      "~/config/*": [
+        "config/*"
+      ],
+      "~/start/*": [
+        "start/*"
+      ],
+      "~/tests/*": [
+        "tests/*"
+      ],
+      "~/*": [
+        "app/*"
+      ]
     }
   }
 }

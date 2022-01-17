@@ -20,7 +20,11 @@ export class CreateUserController implements ControllerContract {
 
     if (errors.length) return response.badRequest({ errors });
 
-    const user = await this.createUser.execute(payload);
-    response.created(user);
+    try {
+      const user = await this.createUser.execute(payload);
+      response.created(user);
+    } catch (error) {
+      response.badRequest({ error: error.message });
+    }
   }
 }

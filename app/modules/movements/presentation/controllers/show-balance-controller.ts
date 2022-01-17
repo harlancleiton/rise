@@ -11,8 +11,11 @@ export class ShowBalanceController implements ControllerContract {
   }: HttpContextContract): Promise<void> {
     const { accountId } = request.params();
 
-    const balance = await this.calculateBalance.execute(accountId);
-
-    response.ok({ balance });
+    try {
+      const balance = await this.calculateBalance.execute(accountId);
+      response.ok({ balance });
+    } catch (error) {
+      response.badRequest({ error: error.message });
+    }
   }
 }
