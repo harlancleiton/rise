@@ -1,7 +1,8 @@
 import {
   HttpContextContract,
   MockedRequestValidator,
-  RequestValidatorContract
+  RequestValidatorContract,
+  ValidationError
 } from '~/common';
 import { TransferFundsBetweenInternalAccounts } from '~/modules/movements/domain';
 import { TransferFundsBetweenInternalAccountsController } from '~/modules/movements/presentation';
@@ -54,7 +55,6 @@ describe('TransferFundsBetweenInternalAccountsController', () => {
       throw new Error();
     });
 
-    // TODO add HttpContext factory
     const context: HttpContextContract = {
       // @ts-ignore
       request: { body: () => payload },
@@ -71,7 +71,6 @@ describe('TransferFundsBetweenInternalAccountsController', () => {
 
     jest.spyOn(transferFundsBetweenInternalAccounts, 'execute');
 
-    // TODO add HttpContext factory
     const context: HttpContextContract = {
       // @ts-ignore
       request: { body: () => payload },
@@ -96,7 +95,6 @@ describe('TransferFundsBetweenInternalAccountsController', () => {
         throw new Error();
       });
 
-    // TODO add HttpContext factory
     const context: HttpContextContract = {
       // @ts-ignore
       request: { body: () => payload },
@@ -105,5 +103,56 @@ describe('TransferFundsBetweenInternalAccountsController', () => {
     };
 
     await expect(sut.handle(context)).rejects.toThrow();
+  });
+
+  it('should calls response.noContent with correct values', async () => {
+    const payload =
+      factories.movements.transferFundsBetweenInternalAccounts.build();
+
+    const context: HttpContextContract = {
+      // @ts-ignore
+      request: { body: () => payload },
+      // @ts-ignore
+      response: { noContent: jest.fn() }
+    };
+
+    jest.spyOn(context.response, 'noContent');
+
+    await sut.handle(context);
+
+    expect(context.response.noContent).toBeCalled();
+  });
+
+  it('should calls response.badRequest with correct values', async () => {
+    const payload =
+      factories.movements.transferFundsBetweenInternalAccounts.build();
+
+    const validationError: ValidationError = {
+      field: 'any_field',
+      value: 'any_value',
+      validation: { required: 'Lorem ipsum' },
+      children: []
+    };
+
+    jest
+      .spyOn(requestValidator, 'validate')
+      .mockImplementationOnce(async () => {
+        return { errors: [validationError], payload };
+      });
+
+    const context: HttpContextContract = {
+      // @ts-ignore
+      request: { body: () => payload },
+      // @ts-ignore
+      response: { noContent: jest.fn(), badRequest: jest.fn() }
+    };
+
+    jest.spyOn(context.response, 'badRequest');
+
+    await sut.handle(context);
+
+    expect(context.response.badRequest).toBeCalledWith({
+      errors: [validationError]
+    });
   });
 });
