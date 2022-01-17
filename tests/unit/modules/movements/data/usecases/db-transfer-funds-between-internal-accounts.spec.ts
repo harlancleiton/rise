@@ -37,6 +37,17 @@ describe('DbTransferFundsBetweenInternalAccounts', () => {
     });
   });
 
+  it('should throw if addMovement.execute throws', async () => {
+    const payload =
+      factories.movements.transferFundsBetweenInternalAccounts.build();
+
+    jest.spyOn(addMovement, 'execute').mockImplementationOnce(async () => {
+      throw new Error();
+    });
+
+    await expect(sut.execute(payload)).rejects.toThrow();
+  });
+
   it("should throw if valueCents isn't positive", async () => {
     const valueCentsNumber = factories.faker.datatype.number({
       min: -99999,
