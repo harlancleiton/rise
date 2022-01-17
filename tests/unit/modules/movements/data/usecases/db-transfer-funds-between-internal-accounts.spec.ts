@@ -36,4 +36,21 @@ describe('DbTransferFundsBetweenInternalAccounts', () => {
       valueCents: negativeValueCents
     });
   });
+
+  it("should throw if valueCents isn't positive", async () => {
+    const valueCentsNumber = factories.faker.datatype.number({
+      min: -99999,
+      max: 0
+    });
+    const payload =
+      factories.movements.transferFundsBetweenInternalAccounts.build({
+        valueCents: valueCentsNumber.toString()
+      });
+
+    jest.spyOn(addMovement, 'execute');
+
+    await expect(sut.execute(payload)).rejects.toThrow();
+
+    expect(addMovement.execute).not.toBeCalled();
+  });
 });
