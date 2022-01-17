@@ -7,5 +7,10 @@ export default async function (
 ) {
   await fastify.register(import('./users'), { ...opts, prefix: 'users' });
 
+  await fastify.register(import('./movements'), {
+    ...opts,
+    prefix: 'movements'
+  });
+
   done();
 }
