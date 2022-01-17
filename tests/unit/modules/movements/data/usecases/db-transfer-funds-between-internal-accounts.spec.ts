@@ -28,9 +28,12 @@ describe('DbTransferFundsBetweenInternalAccounts', () => {
       userId: payload.destinationAccount,
       valueCents: payload.valueCents
     });
+
+    const negativeValueCents = `-${payload.valueCents}`;
+
     expect(addMovement.execute).toBeCalledWith({
       userId: payload.sourceAccount,
-      valueCents: payload.valueCents
+      valueCents: negativeValueCents
     });
   });
 });
