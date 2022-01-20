@@ -2,6 +2,8 @@ import Fastify from 'fastify';
 
 import { PrismaContainer } from '~/common';
 
+import { appConfig } from './config/app';
+
 async function bootstrap() {
   const prisma = PrismaContainer.getInstance();
   await prisma.$connect();
@@ -16,9 +18,9 @@ async function bootstrap() {
     done();
   });
 
-  await fastify.register(import('./start/routes'));
+  fastify.register(import('./start/routes'));
 
-  fastify.listen(3333, '0.0.0.0', err => {
+  fastify.listen(appConfig.port, appConfig.address, err => {
     if (err) {
       fastify.log.error(err);
       process.exit(1);
