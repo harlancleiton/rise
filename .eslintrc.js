@@ -26,6 +26,10 @@ module.exports = {
       'error',
       { allow: ['private-constructors'] }
     ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { ignoreRestSiblings: true }
+    ],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {
