@@ -9,7 +9,7 @@ import {
 export function fastifyAdaptRoute(
   controller: ControllerContract
 ): RouteHandlerMethod {
-  return async function (request, reply) {
+  return function (request, reply) {
     controller.handle({
       request: new FastifyRequestAdapter(request),
       response: new FastifyReplyAdapter(reply)
