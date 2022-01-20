@@ -1,4 +1,12 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["dist", "tests", "jest.config.ts", "**/*.spec.ts"]
+  "compilerOptions": {
+    "declaration": true
+  },
+  "exclude": [
+    "dist",
+    "tests",
+    "jest.config.ts",
+    "**/*.spec.ts"
+  ]
 }
