@@ -24,9 +24,9 @@ export class DbDebitAccount implements AddMovement {
     if (parsedBalance === 0)
       throw new Error('Transação não aprovada. Saldo insuficiente.');
 
-    const balanceMinusValueCents = parsedBalance - parsedValueCents;
+    const balancePostOperation = parsedValueCents + parsedBalance;
 
-    if (balanceMinusValueCents < 0)
+    if (balancePostOperation < 0)
       throw new Error('Transação não aprovada. Saldo insuficiente.');
 
     const movement = await this.movementRepository.create(payload);
