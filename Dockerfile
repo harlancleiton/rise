@@ -1,16 +1,17 @@
-FROM node:alpine
+FROM node:latest
 
-WORKDIR /src
+WORKDIR /app
 
-COPY package*.json ./
+COPY package.json yarn.* ./
 
 EXPOSE 3333
 
 ENV NODE_ENV=development
 
-RUN npm install
+RUN yarn install
 
 COPY . ./
 
-RUN npm run build
-CMD ["npm", "run", "start"]
+RUN yarn run build
+
+CMD ["yarn", "run", "start"]
