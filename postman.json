@@ -1,0 +1,617 @@
+{
+	"info": {
+		"_postman_id": "fb85e38c-e0db-4456-b7af-1a9a4457356f",
+		"name": "Rise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"05452461302\",\n    \"email\": \"example@mail.com\",\n    \"name\": \"Lorem Ipsum\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v1/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"05452461302\",\n    \"email\": \"example@mail.com\",\n    \"name\": \"Lorem Ipsum\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "301"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:09:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"82a76a55-b163-4134-9ea5-cc57d194cd8f\",\n    \"cpf\": \"05452461302\",\n    \"name\": \"Lorem Ipsum\",\n    \"email\": \"example@mail.com\",\n    \"createdAt\": \"2022-01-20T20:09:05.033Z\",\n    \"updatedAt\": \"2022-01-20T20:09:05.033Z\"\n}"
+						},
+						{
+							"name": "400 - Email exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"05452461302\",\n    \"email\": \"example@mail.com\",\n    \"name\": \"Lorem Ipsum\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "32"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:09:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Email já cadastrado\"\n}"
+						},
+						{
+							"name": "400 - CPF exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"05452461302\",\n    \"email\": \"example2@mail.com\",\n    \"name\": \"Lorem Ipsum\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/users",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "30"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:10:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"CPF já cadastrado\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Balance",
+			"item": [
+				{
+					"name": "ShowBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v1/balance/c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v1",
+								"balance",
+								"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/v1/balance/c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"balance",
+										"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "19"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:50:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"balance\": \"10000\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Movement",
+			"item": [
+				{
+					"name": "CreditAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"4ea6be30-9118-49e6-aab5-85fb07972f4f\",\n    \"valueCents\": \"10000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v1/movements",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v1",
+								"movements"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"dee8a2fe-fc9d-4e0a-bdab-3947c627b603\",\n    \"valueCents\": \"10000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/movements",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"movements"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "192"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:32:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"18a1ffbc-1c0a-4d53-8fc7-79aeb9e9711f\",\n    \"valueCents\": \"10000\",\n    \"userId\": \"dee8a2fe-fc9d-4e0a-bdab-3947c627b603\",\n    \"createdAt\": \"2022-01-20T20:32:18.744Z\",\n    \"updatedAt\": \"2022-01-20T20:32:18.744Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DebitAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0\",\n    \"valueCents\": \"-10000000000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v1/movements",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v1",
+								"movements"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"dee8a2fe-fc9d-4e0a-bdab-3947c627b603\",\n    \"valueCents\": \"-1000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/movements",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"movements"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "192"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:32:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"9fd3273c-351c-460c-a579-84d053bb8958\",\n    \"valueCents\": \"-1000\",\n    \"userId\": \"dee8a2fe-fc9d-4e0a-bdab-3947c627b603\",\n    \"createdAt\": \"2022-01-20T20:32:37.012Z\",\n    \"updatedAt\": \"2022-01-20T20:32:37.012Z\"\n}"
+						},
+						{
+							"name": "400 - Insufficient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0\",\n    \"valueCents\": \"-10000000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/movements",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"movements"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "58"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 20:45:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Transação não aprovada. Saldo insuficiente.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "TransferFunds",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sourceAccount\": \"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0\",\n\t\"destinationAccount\": \"4ea6be30-9118-49e6-aab5-85fb07972f4f\",\n\t\"valueCents\": \"100\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v1/transfer-funds-between-internal-accounts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v1",
+								"transfer-funds-between-internal-accounts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204 - No Content",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"sourceAccount\": \"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0\",\n\t\"destinationAccount\": \"4ea6be30-9118-49e6-aab5-85fb07972f4f\",\n\t\"valueCents\": \"100\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/transfer-funds-between-internal-accounts",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"transfer-funds-between-internal-accounts"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 22:41:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "400 - Insufficient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"sourceAccount\": \"c0dbdd5b-1ad4-4d64-9c69-a5d8d06060a0\",\n\t\"destinationAccount\": \"4ea6be30-9118-49e6-aab5-85fb07972f4f\",\n\t\"valueCents\": \"1000000000000000000000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/v1/transfer-funds-between-internal-accounts",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"v1",
+										"transfer-funds-between-internal-accounts"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "content-length",
+									"value": "58"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 22:42:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"Transação não aprovada. Saldo insuficiente.\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
