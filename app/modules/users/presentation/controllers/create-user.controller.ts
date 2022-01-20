@@ -22,7 +22,8 @@ export class CreateUserController implements ControllerContract {
 
     try {
       const user = await this.createUser.execute(payload);
-      response.created(user);
+      const { password, ...userWithoutPassword } = user;
+      response.created(userWithoutPassword);
     } catch (error) {
       response.badRequest({ error: error.message });
     }
