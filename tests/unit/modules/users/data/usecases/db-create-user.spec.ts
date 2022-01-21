@@ -21,6 +21,9 @@ describe('DbCreateUser', () => {
   it('should calls usersRepository.create with correct values', async () => {
     const createUser = factories.users.createUser.build();
 
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
+
     jest.spyOn(userRepository, 'create');
 
     await sut.execute(createUser);
@@ -28,8 +31,41 @@ describe('DbCreateUser', () => {
     expect(userRepository.create).toBeCalledWith(createUser);
   });
 
+  it('should throw if email is already registered', async () => {
+    const createUser = factories.users.createUser.build();
+
+    jest
+      .spyOn(userRepository, 'findByEmail')
+      .mockResolvedValueOnce(factories.users.user.build());
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
+
+    jest.spyOn(userRepository, 'create');
+
+    await expect(sut.execute(createUser)).rejects.toThrow();
+
+    expect(userRepository.create).not.toBeCalled();
+  });
+
+  it('should throw if cpf is already registered', async () => {
+    const createUser = factories.users.createUser.build();
+
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest
+      .spyOn(userRepository, 'findByCpf')
+      .mockResolvedValueOnce(factories.users.user.build());
+
+    jest.spyOn(userRepository, 'create');
+
+    await expect(sut.execute(createUser)).rejects.toThrow();
+
+    expect(userRepository.create).not.toBeCalled();
+  });
+
   it('should throw if usersRepository.create throws', async () => {
     const createUser = factories.users.createUser.build();
+
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
 
     jest.spyOn(userRepository, 'create').mockImplementationOnce(() => {
       throw new Error();
@@ -41,6 +77,9 @@ describe('DbCreateUser', () => {
   it('should calls hash.make with correct values', async () => {
     const createUser = factories.users.createUser.build();
     const expectedPassword = String(createUser.password);
+
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
 
     jest.spyOn(hash, 'make');
 
@@ -56,6 +95,9 @@ describe('DbCreateUser', () => {
       throw new Error();
     });
 
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
+
     jest.spyOn(userRepository, 'create');
 
     await expect(sut.execute(createUser)).rejects.toThrowError();
@@ -67,6 +109,9 @@ describe('DbCreateUser', () => {
     const createUser = factories.users.createUser.build();
 
     const mockedUser = factories.users.user.build();
+
+    jest.spyOn(userRepository, 'findByEmail').mockResolvedValueOnce(null);
+    jest.spyOn(userRepository, 'findByCpf').mockResolvedValueOnce(null);
 
     jest
       .spyOn(userRepository, 'create')
